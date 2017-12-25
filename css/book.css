@@ -1,0 +1,287 @@
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
+@font-face {
+    src: url('../font/Prompt-Regular.ttf');
+    font-family: 'Prompt';
+}
+
+@font-face {
+    src: url('../font/Prompt-Black.ttf');
+    font-family: 'Prompt Black';
+}
+
+body {
+    font-family: 'Prompt';
+    margin-top: 73px;
+}
+
+.list,
+.price {
+    width: 50%;
+}
+
+@media (min-width: 576px) {
+    body {
+        font-family: 'Prompt';
+        margin-top: 57px;
+    }
+    .list {
+        width: 60%;
+    }
+}
+
+@media (min-width: 768px) {
+    body {
+        font-family: 'Prompt';
+        margin-top: 57px;
+    }
+    .list {
+        width: 70%;
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+        font-family: 'Prompt';
+        margin-top: 57px;
+    }
+    .list {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        font-family: 'Prompt';
+        margin-top: 57px;
+    }
+    .list {
+        width: 70%;
+    }
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+}
+
+.main-logo {
+    width: 2rem;
+}
+
+.navbar-brand {
+    font-family: 'Prompt Black';
+    font-size: 2rem;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0)
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+
+.footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+.nav-tabs .nav-link {
+    border-radius: 0px;
+    border: 0;
+}
+
+.nav-link[data-target="#conclude"].active,
+.nav-link[data-target="#conclude"]:hover {
+    background-color: #E8679C;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #E8679C;
+}
+
+.nav-link[data-target="#conclude"] {
+    background-color: #FFB3C7;
+}
+
+.nav-link[data-target="#income-outcome"].active,
+.nav-link[data-target="#income-outcome"]:hover {
+    background-color: #A4D05F;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #A4D05F;
+}
+
+.nav-link[data-target="#income-outcome"] {
+    background-color: #E1F7D5;
+}
+
+.nav-link[data-target="#history"].active,
+.nav-link[data-target="#history"]:hover {
+    background-color: #FDDD62;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #FDDD62;
+}
+
+.nav-link[data-target="#history"] {
+    background-color: #FFFFBA;
+}
+
+.nav-link[data-target="#settings"].active,
+.nav-link[data-target="#settings"]:hover {
+    background-color: #27A4DD;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #27A4DD;
+}
+
+.nav-link[data-target="#settings"] {
+    background-color: #BAE1FF;
+}
+
+.nav-link[data-target="#income"].active,
+.nav-link[data-target="#income"]:hover,
+.nav-link[data-target="#incomeHis"].active,
+.nav-link[data-target="#incomeHis"]:hover {
+    background-color: #28A745;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-link[data-target="#income"],
+.nav-link[data-target="#incomeHis"] {
+    background-color: #1A6F2E;
+}
+
+.nav-link[data-target="#outcome"].active,
+.nav-link[data-target="#outcome"]:hover,
+.nav-link[data-target="#outcomeHis"].active,
+.nav-link[data-target="#outcomeHis"]:hover {
+    background-color: #DC3545;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-link[data-target="#outcome"],
+.nav-link[data-target="#outcomeHis"] {
+    background-color: #92232E;
+}
+
+.nav-item:hover {
+    color: #fff;
+    font-weight: bold;
+}
+
+#conclude {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e8679c+0,ffffff+10 */
+    background: #e8679c;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #e8679c 0%, #ffffff 100px);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #e8679c 0%, #ffffff 100px);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #e8679c 0%, #ffffff 100px);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8679c', endColorstr='#ffffff', GradientType=0);
+    /* IE6-9 */
+}
+
+#income-outcome {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a4d05f+0,ffffff+100 */
+    background: #a4d05f;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #a4d05f 0%, #ffffff 100px);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #a4d05f 0%, #ffffff 100px);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #a4d05f 0%, #ffffff 100px);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4d05f', endColorstr='#ffffff', GradientType=0);
+    /* IE6-9 */
+}
+
+#history {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fddd62+0,ffffff+100 */
+    background: #fddd62;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #fddd62 0%, #ffffff 100px);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #fddd62 0%, #ffffff 100px);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #fddd62 0%, #ffffff 100px);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fddd62', endColorstr='#ffffff', GradientType=0);
+    /* IE6-9 */
+}
+
+#settings {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#27a4dd+0,ffffff+100 */
+    background: #27a4dd;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #27a4dd 0%, #ffffff 100px);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #27a4dd 0%, #ffffff 100px);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #27a4dd 0%, #ffffff 100px);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27a4dd', endColorstr='#ffffff', GradientType=0);
+    /* IE6-9 */
+}
+
+#income,
+#incomeHis {
+    background-color: #B7E1C1;
+}
+
+#outcome,
+#outcomeHis {
+    background-color: #F3BBC1;
+}
+
+.card {
+    border-style: none;
+    border-radius: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.card-header {
+    background: none;
+}
+
+.bg-light:hover {
+    background-color: #DDDDDD;
+}
+
+.card-header {
+    background: none;
+}
+
+.vertical-text {
+    transform: rotate(90deg);
+    float: right;
+    display: block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}

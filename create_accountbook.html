@@ -1,0 +1,179 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Saving</title>
+    <link rel="icon" href="./img/010-piggy-bank.png">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="./css/home.css">
+    <style>
+        .swal-overlay {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .swal-title {
+            margin-bottom: 20px;
+        }
+
+        .bg-pink {
+            color: #fff;
+            background-color: #FF7BAC;
+        }
+
+        .bg-pink:hover {
+            background-color: #E8679C;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-md-0">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                S a v i n g
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active d-none" id="user">
+                        <a class="nav-link" href="./home.html" style="color:#FF7BAC">
+                            ยินดีต้อนรับคุณ
+                            <span id="username"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item active d-none" id="signout">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            ออกจากระบบ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>สร้างบัญชีรายรับ - รายจ่ายใหม่</h3>
+            </div>
+            <div class="col-12">
+                <hr class="bg-pink">
+            </div>
+            <div class="col-12">
+                <form action="" class="form-row" id="create-account">
+                    <div class="col-md-4">
+                        <img src="./img/notebook_blue.png" class="w-100" id="preview-book">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="accountbook">ชื่อสมุดบัญชี</label>
+                            <input type="text" class="form-control" id="accountbook" name="accountbook" placeholder="ชื่อสมุดบัญชี">
+                            <small class="form-text text-danger d-none" id="text-error">* ชื่อบัญชีนี้มีอยู่แล้วกรุณาใช้ชื่อใหม่</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookcolor">สีของสมุดบัญชี</label>
+                            <select name="bookcolor" class="form-control" id="bookcolor">
+                                <option value="blue" style="background-color: #668DE5;">สีน้ำเงิน</option>
+                                <option value="bluegreen" style="background-color: #67EEBD;">สีเขียวน้ำทะเล</option>
+                                <option value="brown" style="background-color: #F5A26F;">สีน้ำตาล</option>
+                                <option value="green" style="background-color: #71E096;">สีเขียว</option>
+                                <option value="indigo" style="background-color: #898CFF;">สีม่วง</option>
+                                <option value="lightblue" style="background-color: #90D4F7;">สีฟ้า</option>
+                                <option value="lime" style="background-color: #CFF381;">สีเขียวมะนาว</option>
+                                <option value="pink" style="background-color: #FF89B5;">สีชมพู</option>
+                                <option value="red" style="background-color: #ED6D79;">สีแดง</option>
+                                <option value="yellow" style="background-color: #FFDC89;">สีเหลือง</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookdetail">รายละเอียดสมุดบัญชี</label>
+                            <textarea type="text" rows="5" class="form-control" id="bookdetail" name="bookdetail" placeholder="รายละเอียดสมุดบัญชี"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-md-5 mt-sm-2">
+                        <button type="button" class="btn btn-lg text-light bg-pink w-50 d-block mx-auto" id="create">สร้าง</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Custom Script -->
+    <script src="./js/check_signin.js"></script>
+    <script src="./js/signout.js"></script>
+    <script src="./js/book_color.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#create').prop('disabled', true);
+        });
+
+        $(function () {
+            $('#create').click(function () {
+                var data = $('#create-account').serializeArray();
+                $.ajax({
+                    url: './php/create_accountbook.php',
+                    data: data,
+                    type: 'get',
+                    success: callback
+                });
+            });
+
+            function callback(result) {
+                if (result == 'repeat') {
+                    $('#accountbook').addClass('bg-danger');
+                    $('#accountbook').addClass('text-light');
+                    $('#text-error').removeClass('d-none');
+                } else {
+                    swal({
+                        title: 'สร้างสมุดบัญชีใหม่เรียบร้อย',
+                        icon: 'success',
+                        button: false,
+                        timer: 2000,
+                    }).then(function() {
+                        window.location.href = './home.html';
+                    });
+                }
+            }
+
+            $('#accountbook').click(function () {
+                $(this).removeClass('bg-danger');
+                $(this).removeClass('text-light');
+                $('#text-error').addClass('d-none');
+                $(this).val(null);
+            });
+
+            $('#accountbook').keypress(function () {
+                var empty = false;
+                $('#accountbook').each(function () {
+                    if ($(this).val() == '') {
+                        empty = true;
+                    }
+                });
+
+                if (empty) {
+                    $('#create').prop('disabled', true);
+                } else {
+                    $('#create').prop('disabled', false);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

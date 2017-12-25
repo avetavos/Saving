@@ -1,0 +1,723 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Saving</title>
+    <link rel="icon" href="./img/010-piggy-bank.png">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="./css/book.css">
+    <style>
+        .swal-overlay {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .swal-title {
+            margin-bottom: 20px;
+        }
+
+        .bg-pink {
+            color: #fff;
+            background-color: #FF7BAC;
+        }
+
+        .bg-pink:hover {
+            background-color: #E8679C;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-md-0">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                S a v i n g
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active d-none" id="account">
+
+                    </li>
+                    <li class="nav-item active d-none" id="all">
+                        <a class="nav-link" href="home.html" style="color:#FF7BAC">
+                            บัญชีทั้งหมด
+                        </a>
+                    </li>
+                    <li class="nav-item active d-none" id="signout">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            ออกจากระบบ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="nav-item col-3 text-center px-0 rounded-0">
+                        <a data-target="#conclude" class="nav-link" data-toggle="tab">
+                            <span class="d-none d-sm-block">
+                                <i class="fa fa-line-chart" aria-hidden="true"></i> สรุปผลการประหยัด</span>
+                            <span class="d-block d-sm-none">
+                                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item col-3 text-center px-0 rounded-0">
+                        <a data-target="#income-outcome" class="nav-link" data-toggle="tab">
+                            <span class="d-none d-sm-block">
+                                <i class="fa fa-book" aria-hidden="true"></i> สร้างรายการรายรับ - รายจ่าย</span>
+                            <span class="d-block d-sm-none">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item col-3 text-center px-0 rounded-0">
+                        <a data-target="#history" class="nav-link" data-toggle="tab">
+                            <span class="d-none d-sm-block">
+                                <i class="fa fa-history" aria-hidden="true"></i> ประวัติการบันทึกย้อนหลัง</span>
+                            <span class="d-block d-sm-none">
+                                <i class="fa fa-history" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item col-3 text-center px-0 rounded-0">
+                        <a data-target="#settings" class="nav-link" data-toggle="tab">
+                            <span class="d-none d-sm-block">
+                                <i class="fa fa-wrench" aria-hidden="true"></i> ตั้งค่าสมุดบัญชี</span>
+                            <span class="d-block d-sm-none">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="conclude">
+                        <div class="container mb-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1 class="d-none d-sm-block mt-3">สรุปผลการประหยัด</h1>
+                                    <h4 class="d-block d-sm-none mt-3">สรุปผลการประหยัด</h4>
+                                    <hr class="bg-dark">
+                                    <canvas id="myChart" class="my-3 col-12" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="income-outcome">
+                        <div class="container mb-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1 class="d-none d-sm-block mt-3">สร้างรายการรายรับ - รายจ่าย</h1>
+                                    <h4 class="d-block d-sm-none mt-3">สร้างรายการรายรับ - รายจ่าย</h4>
+                                    <hr class="bg-dark">
+                                </div>
+                                <div class="col-12">
+                                    <h5>รายการประจำวันที่
+                                        <span id="date-now" class="font-weight-bold"></span>
+                                    </h5>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs" id="listTab">
+                                        <li class="nav-item col-6 text-center px-0 rounded-0">
+                                            <a data-target="#income" class="nav-link" data-toggle="tab">รายรับ</a>
+                                        </li>
+                                        <li class="nav-item col-6 text-center px-0 rounded-0">
+                                            <a data-target="#outcome" class="nav-link" data-toggle="tab">รายจ่าย</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="income">
+                                            <div class="container mb-5">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <form id="income-form">
+                                                            <input type="hidden" name="bookID" id="income-id">
+                                                            <input type="hidden" id="income-date" name="income-date">
+                                                            <table class="table text-center table-striped" id="income-table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="list">รายการ</th>
+                                                                        <th class="price">จำนวนเงิน (บาท)</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <button type="button" class="btn btn-primary" id="add-income">
+                                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มรายการ</button>
+                                                            </div>
+                                                            <div class="col-6 text-right">
+                                                                <button type="button" class="btn btn-success" id="save-income">
+                                                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> บันทึก</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="outcome">
+                                            <div class="container mb-5">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <form id="outcome-form">
+                                                            <input type="hidden" name="bookID" id="outcome-id">
+                                                            <input type="hidden" id="outcome-date" name="outcome-date">
+                                                            <table class="table text-center table-striped" id="outcome-table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="list">รายการ</th>
+                                                                        <th class="price">จำนวนเงิน (บาท)</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-12 my-3">
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <button type="button" class="btn btn-primary" id="add-outcome">
+                                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> เพิ่มรายการ</button>
+                                                            </div>
+                                                            <div class="col-6 text-right">
+                                                                <button type="button" class="btn btn-success" id="save-outcome">
+                                                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> บันทึก</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="history">
+                        <div class="container mb-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1 class="d-none d-sm-block mt-3">ประวัติการบันทึกย้อนหลัง</h1>
+                                    <h4 class="d-block d-sm-none mt-3">ประวัติการบันทึกย้อนหลัง</h4>
+                                    <hr class="bg-dark">
+                                </div>
+                                <div class="col-12">
+                                    <form action="" id="form-his">
+                                        <input type="hidden" name="id-his" id="id-his">
+                                        <label for="his-date">โปรดระบุวันที่-เดือน-ปีที่ต้องการค้นหาข้อมูล</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" id="his-date" name="his-date">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button" id="search-his">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-12" id="history-display">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="settings">
+                        <div class="container mb-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1 class="d-none d-sm-block mt-3">ตั้งค่าสมุดบัญชี</h1>
+                                    <h4 class="d-block d-sm-none mt-3">ตั้งค่าสมุดบัญชี</h4>
+                                    <hr class="bg-dark">
+                                    <div id="accordion" role="tablist">
+                                        <div class="card">
+                                            <a class="text-dark" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <div class="card-header" role="tab" id="headingOne">
+                                                    <h5 class="mb-0">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i> แก้ไขข้อมูลสมุดบัญชี
+                                                    </h5>
+                                                </div>
+                                            </a>
+
+                                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    <form action="" class="form-row" id="edit-account">
+                                                        <input type="hidden" name="id" id="bookID" value="">
+                                                        <div class="col-md-4" id="picbook">
+
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label for="accountbook">ชื่อสมุดบัญชี</label>
+                                                                <input type="text" class="form-control" id="accountbook" name="accountbook" placeholder="ชื่อสมุดบัญชี">
+                                                                <small class="form-text text-danger d-none" id="text-error">* ชื่อบัญชีนี้มีอยู่แล้วกรุณาใช้ชื่อใหม่</small>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="bookcolor">สีของสมุดบัญชี</label>
+                                                                <select name="bookcolor" class="form-control" id="bookcolor">
+                                                                    <option value="blue" style="background-color: #668DE5;">สีน้ำเงิน</option>
+                                                                    <option value="bluegreen" style="background-color: #67EEBD;">สีเขียวน้ำทะเล</option>
+                                                                    <option value="brown" style="background-color: #F5A26F;">สีน้ำตาล</option>
+                                                                    <option value="green" style="background-color: #71E096;">สีเขียว</option>
+                                                                    <option value="indigo" style="background-color: #898CFF;">สีม่วง</option>
+                                                                    <option value="lightblue" style="background-color: #90D4F7;">สีฟ้า</option>
+                                                                    <option value="lime" style="background-color: #CFF381;">สีเขียวมะนาว</option>
+                                                                    <option value="pink" style="background-color: #FF89B5;">สีชมพู</option>
+                                                                    <option value="red" style="background-color: #ED6D79;">สีแดง</option>
+                                                                    <option value="yellow" style="background-color: #FFDC89;">สีเหลือง</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="bookdetail">รายละเอียดสมุดบัญชี</label>
+                                                                <textarea type="text" rows="5" class="form-control" id="bookdetail" name="bookdetail" placeholder="รายละเอียดสมุดบัญชี"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mt-md-5 mt-sm-2">
+                                                            <button type="button" class="btn btn-lg text-light bg-pink w-50 d-block mx-auto" id="edit">แก้ไข</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <a class="collapsed text-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <div class="card-header" role="tab" id="headingTwo">
+                                                    <h5 class="mb-0 d-inline">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i> ลบสมุดบัญชี
+                                                    </h5>
+                                                    <h3 class="mb-0 float-right text-danger d-inline">
+                                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                    </h3>
+                                                </div>
+                                            </a>
+
+                                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                <div class="card-body bg-danger">
+                                                    <form class="justify-content-center form-row" id="del-account">
+                                                        <div class="col-md-7 text-center text-light">
+                                                            <h3 class="d-none d-sm-block mt-3 font-weight-bold">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i> ลบสมุดบัญชี</h>
+                                                                <h4 class="d-block d-sm-none mt-3 font-weight-bold">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i> ลบสมุดบัญชี</h4>
+                                                                <hr class="bg-light">
+                                                        </div>
+                                                        <div class="form-group col-md-7">
+                                                            <label for="confirmdel" class="text-light">กรุณาระบุชื่อบัญชีให้ถูกต้องเพื่อลบบัญชี</label>
+                                                            <input type="text" class="form-control" id="confirmdel">
+                                                        </div>
+                                                        <div class="col-md-7 text-center">
+                                                            <button type="button" class="btn btn-lg bg-light text-danger" id="btn-del">ลบบัญชี</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Chart JS -->
+    <script src="./node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="./js/signout.js"></script>
+    <script src="./js/book_color.js"></script>
+    <script src="./js/chart_data.js"></script>
+    <script src="./js/getUrlParam.js"></script>
+    <script>
+        var name = "";
+
+        var id = [{
+            name: 'id',
+            value: getUrlParameter('id')
+        }];
+
+        var d = new Date();
+
+        var month = d.getMonth();
+        var day = d.getDate();
+
+        var monthNames = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        ];
+
+        var output1 = day + ' - ' +
+            (('' + month).length < 2 ? '0' : '') + monthNames[month] + ' - ' +
+            (('' + day).length < 2 ? '0' : '') + d.getFullYear();
+
+        var output2 = d.getFullYear() + '-' +
+            (('' + month).length < 2 ? '0' : '') + (month + 1) + '-' +
+            (('' + day).length < 2 ? '0' : '') + day;
+
+        $(document).ready(function() {
+            showIncome();
+            showOutcome();
+
+            $('#btn-del').prop('disabled', true);
+
+            $('#income-id').val(getUrlParameter('id'));
+
+            $('#outcome-id').val(getUrlParameter('id'));
+
+            $('#id-his').val(getUrlParameter('id'));
+
+            $.ajax({
+                url: './php/book.php',
+                data: id,
+                type: 'get',
+                dataType: 'json',
+                success: getBook
+            });
+
+            $('#date-now').html(output1)
+
+            $('#income-date').val(output2);
+
+            $('#outcome-date').val(output2);
+
+            function getBook(result) {
+                $('#all').removeClass('d-none');
+                $('#signout').removeClass('d-none');
+                $('#account').removeClass('d-none');
+                if (result) {
+                    var len = result.length;
+                    var txt = '';
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {
+                            txt += '<a class="nav-link" href="book.html?id=' + result[i]['bookID'] + '">';
+                            txt += '<img src="./img/notebook_' + result[i]['color'] +
+                                '.png" style="width:25px"> ' + result[i]['bookname'];
+                            txt += '</a>';
+                        }
+                        if (txt != '') {
+                            $('#account').append(txt);
+                        }
+                    }
+                }
+            }
+
+            $.ajax({
+                url: './php/edit_book.php',
+                data: id,
+                type: 'get',
+                dataType: 'json',
+                success: editbook
+            });
+
+            function editbook(result) {
+                if (result) {
+                    $('#bookID').val(getUrlParameter('id'));
+                    $('#accountbook').val(result[0]['bookname']);
+                    $('#bookcolor').val(result[0]['color']);
+                    $('#bookdetail').val(result[0]['detail']);
+                    var txt = '<img src="./img/notebook_' + result[0]['color'] +
+                        '.png" class="w-100" id="preview-book">';
+                    $('#picbook').append(txt);
+                    name = result[0]['bookname'];
+                }
+            }
+
+            $(function () {
+                $('#myTab a:first').tab('show');
+            })
+
+            $(function () {
+                $('#listTab a:first').tab('show');
+            })
+        });
+
+        $(function () {
+            $('#edit').click(function () {
+                swal({
+                        title: 'คุณต้องการบันทึกการเปลี่ยนแปลงใช่หรือไม่',
+                        icon: './img/question-mark.png',
+                        buttons: {
+                            catch: {
+                                text: "ใช่ ",
+                                className: "bg-secondary ",
+                                value: "edit",
+                            },
+                            defeat: {
+                                text: "ไม่ ",
+                                className: "bg-pink ",
+                                value: true
+                            }
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "edit":
+                                var data = $('#edit-account').serializeArray();
+                                $.ajax({
+                                    url: './php/save_edit.php',
+                                    data: data,
+                                    type: 'get',
+                                    success: editAlert
+                                });
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+            });
+
+            function editAlert() {
+                swal({
+                    title: 'บันทึกการเปลี่ยนแปลงแล้ว',
+                    icon: 'success',
+                    button: false,
+                    timer: 2000
+                }).then((result) => {
+                    location.reload();
+                });
+            }
+
+            $('#accountbook').click(function () {
+                $(this).removeClass('bg-danger');
+                $(this).removeClass('text-light');
+                $('#text-error').addClass('d-none');
+                $(this).val(null);
+            });
+
+            $('#accountbook').keypress(function () {
+                var empty = false;
+                $('#accountbook').each(function () {
+                    if ($(this).val() == '') {
+                        empty = true;
+                    }
+                });
+
+                if (empty) {
+                    $('#create').prop('disabled', true);
+                } else {
+                    $('#create').prop('disabled', false);
+                }
+            });
+        });
+
+        $(function () {
+            $('#myTab a:last').tab('show');
+        })
+
+        $('#confirmdel').keyup(function () {
+            if ($('#confirmdel').val() != name) {
+                $('#btn-del').prop('disabled', true);
+            } else {
+                $('#btn-del').prop('disabled', false);
+            }
+        });
+
+        $(function () {
+            $('#btn-del').click(function () {
+                $.ajax({
+                    url: './php/del_book.php',
+                    data: id,
+                    type: 'get',
+                    success: delComplete
+                })
+            })
+        })
+
+        function delComplete() {
+            window.location.href = "./home.html";
+        }
+
+        $('#add-income').click(function (e) {
+            event.preventDefault();
+            addTableIncome();
+        });
+
+        function addTableIncome() {
+            var txt =
+                '<tr id="income-add"><td class="p-1"><input type="text" class="form-control" name="income-list" placeholder="รายการ"></td>';
+            txt +=
+                '<td class="p-1"><input type="number" class="form-control" name="income-value" placeholder="จำนวนเงิน"></td></tr>';
+            $('#income-table tbody').append(txt);
+        }
+
+        $('#save-income').click(function () {
+            var incomeData = $('#income-form').serializeArray();
+            $.ajax({
+                url: './php/save_incomelist.php',
+                type: 'get',
+                data: {
+                    incomeData: incomeData
+                },
+                success: incomeSuccess
+            });
+        });
+
+        function incomeSuccess() {
+            $('#income-table tbody tr').remove();
+            showIncome();
+        }
+
+        $('#add-outcome').click(function (e) {
+            event.preventDefault();
+            addTableOutcome();
+        });
+
+        function addTableOutcome() {
+            var txt = '<tr id="outcome-add"><td class="p-1"><input type="text" class="form-control" name="outcome-list" placeholder="รายการ"></td>';
+            txt += '<td class="p-1"><input type="number" class="form-control" name="outcome-value" placeholder="จำนวนเงิน"></td></tr>';
+            $('#outcome-table tbody:last').append(txt);
+        }
+
+        $('#save-outcome').click(function () {
+            var outcomeData = $('#outcome-form').serializeArray();
+            $.ajax({
+                url: './php/save_outcomelist.php',
+                type: 'get',
+                data: {
+                    outcomeData: outcomeData
+                },
+                success: outcomeSuccess
+            });
+        });
+
+        function outcomeSuccess() {
+            $('#outcome-table tbody tr').remove();
+            showOutcome();
+        }
+
+        function showIncome() {
+            $.ajax({
+                url: './php/show_income.php',
+                data: id,
+                type: 'get',
+                dataType: 'json',
+                success: addToIncome
+            });
+        }
+
+        function addToIncome(result) {
+            if (result) {
+                var len = result.length;
+                var txt = '';
+                for (var i = 0; i < len; i++) {
+                    txt += '<tr><td class="text-left">' + result[i]["detail"] + '</td>';
+                    txt += '<td class="text-center">' + result[i]["value"] + '</td></tr>';
+                }
+                if (txt != '') {
+                    $('#income-table tbody').append(txt);
+                }
+            }
+        }
+
+        function showOutcome() {
+            $.ajax({
+                url: './php/show_outcome.php',
+                data: id,
+                type: 'get',
+                dataType: 'json',
+                success: addToOutcome
+            })
+        }
+
+        function addToOutcome(result) {
+            if (result) {
+                var len = result.length;
+                var txt = '';
+                for (var i = 0; i < len; i++) {
+                    txt += '<tr><td class="text-left">' + result[i]["detail"] + '</td>';
+                    txt += '<td class="text-center">' + result[i]["value"] + '</td></tr>';
+                }
+                if (txt != '') {
+                    $('#outcome-table tbody').append(txt);
+                }
+            }
+        }
+
+        $(function () {
+            $('#search-his').click(function () {
+                $('#history-display').empty();
+                if ($('#his-date').val() != "") {
+                    var hisData = $('#form-his').serializeArray();
+                    $.ajax({
+                        url: './php/search_history.php',
+                        data: hisData,
+                        type: 'get',
+                        dataType: 'json',
+                        success: showHistory
+                    })
+                }
+            });
+        })
+
+        function showHistory(result) {
+            if (result.length > 0) {
+                var txtHis =
+                    '<ul class="nav nav-tabs" id="hisTab"><li class="nav-item col-6 text-center px-0 rounded-0"><a data-target="#incomeHis" class="nav-link" data-toggle="tab">ประวัติรายรับ</a></li>';
+                txtHis +=
+                    '<li class="nav-item col-6 text-center px-0 rounded-0"><a data-target="#outcomeHis" class="nav-link" data-toggle="tab">ประวัติรายจ่าย</a></li></ul>';
+                txtHis +=
+                    '<div class="tab-content"><div class="tab-pane active" id="incomeHis"><div class="container mb-5"><div class="row"><div class="col-12"><table class="table text-center table-striped" id="incomeHis-table">';
+                txtHis +=
+                    '</table></div></div></div></div><div class="tab-pane" id="outcomeHis"><div class="container mb-5"><div class="row"><div class="col-12">';
+                txtHis +=
+                    '<table class="table text-center table-striped" id="outcomeHis-table"></table></div></div></div></div></div>';
+                $('#history-display').append(txtHis);
+
+                var len = result.length;
+                var txtIncome =
+                    '<thead><tr><th class="list">รายการ</th><th class="price">จำนวนเงิน (บาท)</th></tr></thead><tbody>';
+                var txtOutcome =
+                    '<thead><tr><th class="list">รายการ</th><th class="price">จำนวนเงิน (บาท)</th></tr></thead><tbody>';
+                for (var i = 0; i < len; i++) {
+                    if (result[i]['type'] == 'Income') {
+                        txtIncome += '<tr><td class="text-left">' + result[i]['detail'] +
+                            '</td><td class="text-center">' + result[i]['value'] + '</td></tr>';
+                    } else if (result[i]['type'] == 'Outcome') {
+                        txtOutcome += '<tr><td class="text-left">' + result[i]['detail'] +
+                            '</td><td class="text-center">' + result[i]['value'] + '</td></tr>';
+                    }
+                }
+                txtIncome += '</tbody>';
+                txtOutcome += '</tbody>';
+
+                $('#incomeHis-table').append(txtIncome);
+                $('#outcomeHis-table').append(txtOutcome);
+            } else {
+                $('#history-display').append('<h3>ไม่พบประวัติรายรับรายจ่าย</h3>');
+                console.log(result);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

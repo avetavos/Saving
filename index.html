@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Saving</title>
+    <link rel="icon" href="./img/010-piggy-bank.png">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        .swal-overlay {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .bg-pink {
+            color: #fff;
+            background-color: #FF7BAC;
+        }
+
+        .bg-pink:hover {
+            background-color: #E8679C;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-md-0">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                S a v i n g
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active d-none" id="signin">
+                        <a class="nav-link" href="./signin.html">
+                            <i class="fa fa-user-o"></i> บัญชีผู้ใช้
+                        </a>
+                    </li>
+                    <li class="nav-item active d-none" id="user">
+                        <a class="nav-link" href="./home.html" style="color:#FF7BAC">
+                            ยินดีต้อนรับคุณ
+                            <span id="username"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item active d-none" id="signout">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            ออกจากระบบ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container-fluid">
+        <div class="container my-5">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="./img/010-piggy-bank.png" class="w-100">
+                </div>
+                <div class="col-md-8 text-center d-none d-md-block">
+                    <h1 class="display-2">ประหยัดวันละนิด</h1>
+                    <h1 class="display-2">ชีวิตจะสดใส</h1>
+                </div>
+                <div class="col-md-8 text-center d-md-none">
+                    <h1 class="display-4">ประหยัดวันละนิด</h1>
+                    <h1 class="display-4">ชีวิตจะสดใส</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <hr class="d-md-block d-sm-none">
+        </div>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="mb-5">บริการจาก Saving</h1>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 mx-auto" style="width: 20rem;">
+                        <div class="px-5">
+                            <img class="card-img-top" src="./img/026-invoice.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title text-center">ระบบบันทึก
+                                <br>รายรับ - รายจ่าย</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 mx-auto" style="width: 20rem;">
+                        <div class="px-5">
+                            <img class="card-img-top" src="./img/024-profits.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title text-center">รายงานสรุปผล
+                                <br>ในรูปแบบกราฟ</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 mx-auto" style="width: 20rem;">
+                        <div class="px-5">
+                            <img class="card-img-top" src="./img/007-safebox.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title text-center">ช่วยจัดการรายจ่าย
+                                <br>เซฟรายรับ</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer bg-dark text-light ">
+        <div class="container py-sm-3">
+            <div class="row">
+                <div class="col-6 px-2">
+                    <p class="my-auto">Copyright 2017 - Saving</p>
+                </div>
+                <div class="col-6 px-2 text-right">ติดต่อ Saving : avetavos@hotmail.com</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Custom Script -->
+    <script src="./js/signout.js"></script>
+    <script src="./js/check_signin.js"></script>
+</body>
+
+</html>

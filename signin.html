@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Saving</title>
+    <link rel="icon" href="./img/010-piggy-bank.png">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="./css/signin.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-md-0">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                S a v i n g
+            </a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-4 text-center">
+                <img src="./img/010-piggy-bank.png" class="w-75">
+            </div>
+        </div>
+        <form class="form-signin">
+            <h2 class="form-signin-heading text-center">กรุณาเข้าสู่ระบบ</h2>
+            <div id="form-popover" rel="popover" data-container="body" data-toggle="popover" data-placement="right" data-original-title="ผิดพลาด !"
+                data-content="อีเมล หรือ รหัสผ่านไม่ถูกต้องกรุณาตรวจสอบการลงชื่อเข้าใช้ของท่านอีกครั้ง">
+                <label for="input-email" class="sr-only">อีเมล</label>
+                <input type="email" class="form-control" name="email" placeholder="อีเมล" id="input-email" required="" autofocus="">
+                <label for="input-password" class="sr-only">รหัสผ่าน</label>
+                <input type="password" class="form-control" name="password" placeholder="รหัสผ่าน" id="input-password" required="">
+            </div>
+            <button type="button" id="signin-btn" class="btn btn-lg btn-block text-light bg-pink">ลงชื่อเข้าใช้</button>
+            <hr>
+            <div class="text-center">
+                <p>หากยังไม่มีบัญชีผู้ใช้กรุณา
+                    <a href="./register.html" class="text-primary">
+                        <strong>สร้างบัญชี</strong>
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Jquery -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Custom Script -->
+    <script>
+        $(function () {
+            $('#signin-btn').click(function () {
+                var data = $('.form-signin').serializeArray();
+                $.ajax({
+                    url: './php/signin.php',
+                    data: data,
+                    type: 'post',
+                    success: callback
+                });
+            });
+        });
+
+        function callback(result) {
+            if (result == 'incorrect') {
+                $('#form-popover').popover({
+                    placement: 'auto'
+                });
+                $('#form-popover').popover('show');
+            } else if (result == 'activate') {
+                window.location.href = './pleace_activate.html';
+            } else {
+                window.location.href = './home.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

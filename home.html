@@ -1,0 +1,163 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Saving</title>
+    <link rel="icon" href="./img/010-piggy-bank.png">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="./css/home.css">
+    <style>
+        .swal-overlay {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .bg-pink {
+            color: #fff;
+            background-color: #FF7BAC;
+        }
+
+        .bg-pink:hover {
+            background-color: #E8679C;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-md-0">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                S a v i n g
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active d-none" id="user">
+                        <a class="nav-link" href="./home.html" style="color:#FF7BAC">
+                            ยินดีต้อนรับคุณ
+                            <span id="username"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item active d-none" id="signout">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            ออกจากระบบ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Desktop -->
+    <div class="container d-none d-sm-block">
+        <div class="row mb-3" id="content-desktop">
+
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <a href="./create_accountbook.html">
+                    <div class="card text-center">
+                        <img class="card-img-top my-2" src="./img/notebook_plus.png" class="w-50">
+                        <div class="card-body p-0">
+                            <h4 class="card-title text-dark">เพิ่มบัญชี
+                                <br>รายรับ - รายจ่าย</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Mobile -->
+    <div class="container d-block d-sm-none">
+        <div class="row" id="content-mobile">
+
+        </div>
+        <div class="row">
+            <a href="./create_accountbook.html">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <img class="card-img-top my-2" src="./img/notebook_plus.png" class="w-75">
+                        </div>
+                        <div class="col-9">
+                            <br>
+                            <h5 class="text-dark">เพิ่มบัญชีรายรับ - รายจ่าย</h5>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Jquery -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Custom Script -->
+    <script src="./js/check_signin.js"></script>
+    <script src="./js/signout.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: './php/home.php',
+                dataType: 'json',
+                success: showbook
+            });
+        });
+
+        function showbook(result) {
+            if (result) {
+                var len = result.length;
+                var txtDes = '';
+                var txtMob = '';
+                if (len > 0) {
+                    for (var i = 0; i < len; i++) {
+                        txtDes += '<div class="col-md-3">';
+                            txtDes += '<a href="./book.html?id=' + result[i]['bookID'] + '">';
+                                txtDes += '<div class="card text-center">';
+                                    txtDes += '<img class="card-img-top my-2" src="./img/notebook_' + result[i]['color'] + '.png" class="w-50">';
+                                    txtDes += '<div class="card-body p-0">';
+                                        txtDes += '<h4 class="card-title text-dark">' + result[i]['bookname'] + '</h4>';
+                                    txtDes += '</div>';
+                                txtDes += '</div>';
+                            txtDes += '</a>';
+                        txtDes += '</div>';
+                    }
+                    for (var i = 0; i < len; i++) {
+                        txtMob += '<a href="./book.html?id=' + result[i]['bookID'] + '">';
+                            txtMob += '<div class="col-12">';
+                                txtMob += '<div class="row">';
+                                    txtMob += '<div class="col-3">';
+                                        txtMob += '<img class="card-img-top my-2" src="./img/notebook_' + result[i]['color'] + '.png" class="w-75">';
+                                    txtMob += '</div>';
+                                    txtMob += '<div class="col-9">';
+                                        txtMob += '<br><h5 class="text-dark">' + result[i]['bookname'] + '</h5><br>';
+                                    txtMob += '</div>';
+                                txtMob += '</div>';
+                            txtMob += '</div>';
+                        txtMob += '</a>';
+                    }
+                    if (txtDes != '') {
+                        $('#content-desktop').append(txtDes);
+                    }
+                    if (txtMob != '') {
+                        $('#content-mobile').append(txtMob);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

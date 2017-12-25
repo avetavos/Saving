@@ -1,0 +1,108 @@
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
+@font-face {
+    src: url('../font/Prompt-Regular.ttf');
+    font-family: 'Prompt';
+}
+
+@font-face {
+    src: url('../font/Prompt-Black.ttf');
+    font-family: 'Prompt Black';
+}
+
+
+body {
+  font-family: 'Prompt';
+  margin-top: 90px;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+}
+
+.main-logo {
+  width: 2rem;
+}
+
+.navbar-brand {
+  font-family: 'Prompt Black';
+  font-size: 2rem;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0)
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.bg-pink {
+  background-color: #FF7BAC;
+}
+
+.bg-pink:hover {
+  background-color: #E8679C;
+}
+
+.popover-header {
+  color: #fff;
+  background-color: #DC3545;
+}

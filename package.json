@@ -1,0 +1,29 @@
+{
+  "name": "saving",
+  "version": "1.0.0",
+  "description": "A website for manage prosonal income and outcome.",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avetavos/Saving.git"
+  },
+  "author": "Aveta Vos <avetavos@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avetavos/Saving/issues"
+  },
+  "homepage": "https://github.com/avetavos/Saving#readme",
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap-datepicker": "^1.7.1",
+    "chart.js": "^2.7.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.3",
+    "sweetalert": "^2.1.0"
+  }
+}
